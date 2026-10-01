@@ -49,18 +49,18 @@
     .editor-panel {
       width: 100%;
       max-width: 980px;
-      background: rgba(255, 255, 255, 0.96);
+      background: rgba(255, 255, 255, 0.97);
       border: 2px solid var(--gold-main);
       border-radius: 14px;
       padding: 18px 20px;
       margin-bottom: 24px;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       transition: all 0.3s ease;
     }
 
     .editor-panel.hidden {
-      display: none;
+      display: none !important;
     }
 
     .editor-header {
@@ -83,8 +83,8 @@
     }
 
     .badge-tip {
-      background: #fef3c7;
-      color: #92400e;
+      background: #dcfce7;
+      color: #166534;
       font-size: 0.78rem;
       padding: 4px 10px;
       border-radius: 999px;
@@ -130,6 +130,28 @@
       box-shadow: 0 0 0 3px rgba(197, 155, 39, 0.2);
     }
 
+    .export-modes-box {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+    }
+
+    .export-modes-title {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #92400e;
+      margin-bottom: 8px;
+    }
+
+    .export-buttons-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
     .action-bar {
       display: flex;
       flex-wrap: wrap;
@@ -151,7 +173,7 @@
       border: none;
       border-radius: 8px;
       padding: 9px 14px;
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       font-weight: 600;
       display: inline-flex;
       align-items: center;
@@ -164,16 +186,22 @@
       transform: scale(0.97);
     }
 
+    .btn-lock {
+      background: linear-gradient(135deg, #15803d, #14532d);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(21, 128, 61, 0.35);
+    }
+
+    .btn-pin {
+      background: linear-gradient(135deg, #1d4ed8, #1e3a8a);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(29, 78, 216, 0.35);
+    }
+
     .btn-primary {
       background: linear-gradient(135deg, #b91c1c, #7f1d1d);
       color: #fff;
       box-shadow: 0 4px 12px rgba(185, 28, 28, 0.35);
-    }
-
-    .btn-gold {
-      background: linear-gradient(135deg, #d97706, #92400e);
-      color: #fff;
-      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.35);
     }
 
     .btn-outline {
@@ -184,22 +212,6 @@
 
     .btn-outline:hover {
       background: #f1f5f9;
-    }
-
-    .toggle-editor-btn {
-      position: fixed;
-      bottom: 16px;
-      right: 16px;
-      z-index: 100;
-      background: rgba(20, 34, 56, 0.9);
-      color: #f3dc8a;
-      border: 1px solid var(--gold-main);
-      padding: 8px 14px;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      cursor: pointer;
-      font-family: system-ui, sans-serif;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
     }
 
     /* Certificate Outer Wrapper */
@@ -493,6 +505,7 @@
       width: 115px;
       height: 125px;
       filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.22));
+      cursor: pointer;
     }
 
     /* Signature + Red Stamp */
@@ -545,9 +558,19 @@
       left: 6%;
       top: 18px;
       transform: rotate(-14deg);
-      pointer-events: none;
       opacity: 0.86;
       z-index: 4;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    /* Viewer Bottom Bar (Only Celebrate + Print) */
+    .viewer-controls {
+      margin-top: 20px;
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
     }
 
     /* Toast Notification */
@@ -566,6 +589,7 @@
       box-shadow: 0 10px 25px rgba(0,0,0,0.5);
       transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       z-index: 2000;
+      text-align: center;
     }
 
     .toast.show {
@@ -610,7 +634,7 @@
         padding: 0;
       }
       .editor-panel,
-      .toggle-editor-btn,
+      .viewer-controls,
       #confetti-canvas,
       .toast {
         display: none !important;
@@ -626,11 +650,11 @@
 
   <canvas id="confetti-canvas"></canvas>
 
-  <!-- BẢNG CHỈNH SỬA NHANH -->
+  <!-- BẢNG CHỈNH SỬA DÀNH RIÊNG CHO BẠN (NGƯỜI TẠO) -->
   <div class="editor-panel" id="editorPanel">
     <div class="editor-header">
-      <h2>🛠️ Bảng Chỉnh Sửa Bằng Tốt Nghiệp (Sửa tới đâu nhảy chữ tới đó)</h2>
-      <span class="badge-tip">Mẹo: Điền xong bấm "Tải file HTML đã đóng khung" để up thẳng lên Vercel!</span>
+      <h2>🛠️ Bảng Thiết Kế Bằng Tốt Nghiệp (Dành riêng cho bạn)</h2>
+      <span class="badge-tip">🔒 Người nhận sẽ KHÔNG thấy bảng này khi bạn xuất file!</span>
     </div>
 
     <div class="editor-grid">
@@ -660,7 +684,7 @@
       </div>
 
       <div class="field-group">
-        <label for="inpDesc">📜 Lời chứng nhận (có thể tự sửa cho lầy lội)</label>
+        <label for="inpDesc">📜 Lời chứng nhận</label>
         <input type="text" id="inpDesc" value="Đã hoàn thành xuất sắc khóa huấn luyện thực chiến: Nhìn khách bước vào đoán ngay máy rơi nước hay vỡ màn, báo giá thay linh kiện không chớp mắt và trấn an khách hàng khi kỹ thuật làm trễ hẹn." />
       </div>
 
@@ -680,24 +704,33 @@
       </div>
     </div>
 
+    <!-- Hộp chọn 2 chế độ tải file an toàn -->
+    <div class="export-modes-box">
+      <div class="export-modes-title">
+        👇 Chọn 1 trong 2 cách tải file <code>index.html</code> dưới đây để đưa lên Vercel:
+      </div>
+      <div class="export-buttons-row">
+        <button class="btn btn-lock" type="button" onclick="downloadHardLockedHTML()">
+          🔒 Cách 1: Tải file KHÓA VĨNH VIỄN (Xóa sạch bộ sửa - Không ai chỉnh được)
+        </button>
+        <button class="btn btn-pin" type="button" onclick="downloadPinProtectedHTML()">
+          🔑 Cách 2: Tải file CÓ MẬT KHẨU BÍ MẬT (Chỉ mình bạn mở khóa sửa được)
+        </button>
+      </div>
+    </div>
+
     <div class="action-bar">
       <div class="btn-group">
         <button class="btn btn-primary" type="button" onclick="launchConfetti()">
-          🎉 Bắn Pháo Giấy Chúc Mừng
-        </button>
-        <button class="btn btn-gold" type="button" onclick="downloadLockedHTML()">
-          💾 Tải file index.html (Đã khóa tên này) để up Vercel
-        </button>
-      </div>
-      <div class="btn-group">
-        <button class="btn btn-outline" type="button" onclick="copyShareUrl()">
-          🔗 Copy Link chia sẻ
+          🎉 Bắn Pháo Giấy Thử
         </button>
         <button class="btn btn-outline" type="button" onclick="window.print()">
           🖨️ In / Lưu PDF
         </button>
+      </div>
+      <div class="btn-group">
         <button class="btn btn-outline" type="button" onclick="toggleEditor()">
-          👁️ Ẩn bảng sửa (Xem như thật)
+          👁️ Ẩn bảng này để xem trước
         </button>
       </div>
     </div>
@@ -753,16 +786,14 @@
           </div>
         </div>
 
-        <!-- Huy hiệu điện thoại + tua vít -->
+        <!-- Huy hiệu điện thoại -->
         <div class="crest-container">
           <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="45" fill="#8b1e24" stroke="#c59b27" stroke-width="4"/>
             <circle cx="50" cy="50" r="38" fill="none" stroke="#f3dc8a" stroke-width="1.5" stroke-dasharray="3 3"/>
-            <!-- Phone Icon -->
             <rect x="36" y="22" width="28" height="52" rx="4" fill="#fffdf7" stroke="#c59b27" stroke-width="2.5"/>
             <line x1="45" y1="27" x2="55" y2="27" stroke="#8b1e24" stroke-width="2" stroke-linecap="round"/>
             <circle cx="50" cy="68" r="2.5" fill="#8b1e24"/>
-            <!-- Check / Heart inside screen -->
             <path d="M43 46 L48 51 L58 39" fill="none" stroke="#15803d" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
@@ -833,11 +864,9 @@
           </div>
 
           <div class="gold-seal-col">
-            <svg class="gold-medal-svg" viewBox="0 0 120 130" xmlns="http://www.w3.org/2000/svg">
-              <!-- Ribbons -->
+            <svg class="gold-medal-svg" onclick="launchConfetti()" title="Bấm để bắn pháo hoa chúc mừng!" viewBox="0 0 120 130" xmlns="http://www.w3.org/2000/svg">
               <polygon points="38,75 22,126 42,116 54,128 56,78" fill="#8b1e24"/>
               <polygon points="82,75 98,126 78,116 66,128 64,78" fill="#6b1419"/>
-              <!-- Starburst Seal -->
               <circle cx="60" cy="52" r="42" fill="#c59b27" stroke="#8a6421" stroke-width="3"/>
               <circle cx="60" cy="52" r="34" fill="#f3dc8a" stroke="#8a6421" stroke-width="1.5" stroke-dasharray="4 2"/>
               <text x="60" y="46" text-anchor="middle" font-size="9" font-weight="bold" fill="#8b1e24">CHỨNG NHẬN</text>
@@ -850,8 +879,8 @@
             <div class="issue-date" id="outDate">Ngày 01 tháng 10 năm 2026</div>
             <div class="signer-role">CHỦ TỊCH HỘI ĐỒNG CẤP BẰNG</div>
 
-            <!-- Con dấu đỏ tròn -->
-            <svg class="red-stamp" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+            <!-- Con dấu đỏ tròn (Bấm 5 lần liên tiếp vào dấu đỏ để mở khóa Admin nếu dùng chế độ mật khẩu) -->
+            <svg class="red-stamp" id="secretStamp" onclick="handleSecretStampClick()" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
               <circle cx="70" cy="70" r="62" fill="none" stroke="#d62828" stroke-width="4"/>
               <circle cx="70" cy="70" r="56" fill="none" stroke="#d62828" stroke-width="1.5"/>
               <circle cx="70" cy="70" r="36" fill="none" stroke="#d62828" stroke-width="2"/>
@@ -870,14 +899,22 @@
     </div>
   </div>
 
-  <!-- Nút bật/tắt chỉnh sửa góc phải dưới -->
-  <button class="toggle-editor-btn" id="floatingToggleBtn" onclick="toggleEditor()">
-    ⚙️ Chỉnh sửa thông tin bằng
-  </button>
+  <!-- Thanh nút lành mạnh bên dưới cho người xem (Chỉ Bắn pháo hoa & In bằng, KHÔNG có nút sửa) -->
+  <div class="viewer-controls">
+    <button class="btn btn-primary" type="button" onclick="launchConfetti()">
+      🎉 Bắn Pháo Giấy Chúc Mừng Tân Cử Nhân
+    </button>
+    <button class="btn btn-outline" type="button" onclick="window.print()">
+      🖨️ In Bằng / Lưu PDF Kỷ Niệm
+    </button>
+  </div>
 
   <div class="toast" id="toastMsg">Đã sao chép!</div>
 
-  <script>
+  <script id="editorScript">
+    // Cấu hình mật khẩu Admin (Mặc định trống khi đang thiết kế)
+    window.ADMIN_PIN = null;
+
     const fields = [
       { input: 'inpName', output: 'outName', param: 'name' },
       { input: 'inpSchool', output: 'outSchool', param: 'school' },
@@ -897,13 +934,14 @@
           elOut.textContent = elIn.value;
         }
       });
-      // Cập nhật chữ ký viết tay theo tên người ký
-      const signerVal = document.getElementById('inpSigner').value || '';
-      const shortSign = signerVal.replace(/^(GS\.TS\.|TS\.|ThS\.|CEO|Chủ tiệm)\s*/i, '');
-      document.getElementById('outSignHand').textContent = shortSign || signerVal;
+      const signerInput = document.getElementById('inpSigner');
+      if (signerInput) {
+        const signerVal = signerInput.value || '';
+        const shortSign = signerVal.replace(/^(GS\.TS\.|TS\.|ThS\.|CEO|Chủ tiệm)\s*/i, '');
+        document.getElementById('outSignHand').textContent = shortSign || signerVal;
+      }
     }
 
-    // Gắn sự kiện gõ phím tới đâu cập nhật tới đó
     fields.forEach(({ input }) => {
       const el = document.getElementById(input);
       if (el) {
@@ -912,82 +950,105 @@
       }
     });
 
-    // Đọc thông tin từ URL nếu gửi link cho bạn bè
-    function loadFromUrlParams() {
-      const params = new URLSearchParams(window.location.search);
-      let hasCustomParam = false;
-      fields.forEach(({ input, param }) => {
-        if (params.has(param)) {
-          document.getElementById(input).value = params.get(param);
-          hasCustomParam = true;
+    function toggleEditor() {
+      const panel = document.getElementById('editorPanel');
+      if (panel) {
+        panel.classList.toggle('hidden');
+        if (panel.classList.contains('hidden')) {
+          showToast('💡 Mẹo: Bấm 5 lần liên tiếp vào CON DẤU ĐỎ trên bằng để mở lại bảng sửa!');
         }
-      });
-      syncFields();
-
-      // Nếu mở qua link chia sẻ (?view=1) thì ẩn khung chỉnh sửa cho bất ngờ
-      if (params.get('view') === '1' || hasCustomParam) {
-        document.getElementById('editorPanel').classList.add('hidden');
       }
     }
 
-    function toggleEditor() {
+    // Cơ chế mở khóa bí mật: Bấm 5 lần liên tiếp vào Con Dấu Đỏ
+    let stampClicks = 0;
+    let stampTimer = null;
+    function handleSecretStampClick() {
       const panel = document.getElementById('editorPanel');
-      panel.classList.toggle('hidden');
+      if (!panel) return; // Bản khóa vĩnh viễn đã xóa hẳn bảng này
+
+      stampClicks++;
+      clearTimeout(stampTimer);
+      stampTimer = setTimeout(() => { stampClicks = 0; }, 1800);
+
+      if (stampClicks >= 5) {
+        stampClicks = 0;
+        if (window.ADMIN_PIN) {
+          const entered = prompt('🔐 Nhập mật khẩu Admin để chỉnh sửa bằng:');
+          if (entered === window.ADMIN_PIN) {
+            panel.classList.remove('hidden');
+            showToast('🔓 Đã mở khóa bảng chỉnh sửa Admin!');
+          } else if (entered !== null) {
+            alert('❌ Sai mật khẩu! Chỉ Hiệu trưởng mới có quyền sửa bằng.');
+          }
+        } else {
+          panel.classList.remove('hidden');
+        }
+      }
     }
 
     function showToast(msg) {
       const t = document.getElementById('toastMsg');
+      if (!t) return;
       t.textContent = msg;
       t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), 2800);
+      setTimeout(() => t.classList.remove('show'), 3200);
     }
 
-    function copyShareUrl() {
-      const params = new URLSearchParams();
-      params.set('view', '1');
-      fields.forEach(({ input, param }) => {
-        params.set(param, document.getElementById(input).value);
-      });
-      const shareUrl = window.location.origin + window.location.pathname + '?' + params.toString();
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(shareUrl).then(() => {
-          showToast('✅ Đã copy link! Khi up lên Vercel bạn gửi link này là hiện đúng tên người nhận!');
-        }).catch(() => {
-          prompt('Copy đường link dưới đây:', shareUrl);
-        });
-      } else {
-        prompt('Copy đường link dưới đây:', shareUrl);
-      }
-    }
-
-    // Xuất ra file index.html đã khóa cứng thông tin hiện tại để người dùng kéo thả lên Vercel/Netlify
-    function downloadLockedHTML() {
+    // CÁCH 1: Xuất ra file index.html ĐÃ XÓA SẠCH hoàn toàn bộ chỉnh sửa (Không một ai sửa được)
+    function downloadHardLockedHTML() {
       syncFields();
       const clone = document.documentElement.cloneNode(true);
-      // Cập nhật value mặc định trong các ô input của bản clone
+
+      // Xóa vĩnh viễn toàn bộ khung chỉnh sửa khỏi mã nguồn HTML tải về
+      const clonePanel = clone.querySelector('#editorPanel');
+      if (clonePanel) clonePanel.remove();
+
+      const htmlContent = '<!DOCTYPE html>\n' + clone.outerHTML;
+      triggerDownload(htmlContent, 'index.html');
+      showToast('🔒 Đã tải file index.html KHÓA VĨNH VIỄN! Up file này lên Vercel thì không ai sửa được!');
+    }
+
+    // CÁCH 2: Xuất ra file index.html ẩn bảng sửa và cài mật khẩu riêng của bạn
+    function downloadPinProtectedHTML() {
+      const pin = prompt('🔑 Đặt mật khẩu riêng của bạn (ví dụ: 1234).\nKhi lên web, bấm 5 lần vào CON DẤU ĐỎ và nhập mật khẩu này mới sửa được:', '1234');
+      if (!pin) return;
+
+      syncFields();
+      const clone = document.documentElement.cloneNode(true);
+
       fields.forEach(({ input }) => {
         const currentVal = document.getElementById(input).value;
         const cloneInput = clone.querySelector('#' + input);
-        if (cloneInput) {
-          cloneInput.setAttribute('value', currentVal);
-        }
+        if (cloneInput) cloneInput.setAttribute('value', currentVal);
       });
-      // Ẩn sẵn bảng chỉnh sửa để khi người nhận mở web chỉ thấy Bằng Tốt Nghiệp + Pháo giấy
+
       const clonePanel = clone.querySelector('#editorPanel');
-      if (clonePanel) {
-        clonePanel.classList.add('hidden');
+      if (clonePanel) clonePanel.classList.add('hidden');
+
+      const scriptEl = clone.querySelector('#editorScript');
+      if (scriptEl) {
+        scriptEl.textContent = scriptEl.textContent.replace(
+          'window.ADMIN_PIN = null;',
+          'window.ADMIN_PIN = ' + JSON.stringify(pin) + ';'
+        );
       }
+
       const htmlContent = '<!DOCTYPE html>\n' + clone.outerHTML;
-      const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+      triggerDownload(htmlContent, 'index.html');
+      showToast('🔑 Đã tải file có mật khẩu (' + pin + ')! Bấm 5 lần vào Con Dấu Đỏ để mở khóa.');
+    }
+
+    function triggerDownload(content, filename) {
+      const blob = new Blob([content], { type: 'text/html;charset=utf-8' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'index.html';
+      a.download = filename;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
-      showToast('🎉 Đã tải file index.html! Giờ bạn chỉ cần kéo file này lên Vercel hoặc Netlify!');
     }
 
     // Hiệu ứng bắn pháo giấy (Confetti)
@@ -1046,8 +1107,6 @@
       }
     }
 
-    // Khởi chạy ban đầu
-    loadFromUrlParams();
     setTimeout(launchConfetti, 400);
   </script>
 </body>
