@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bằng Tốt Nghiệp Lễ Tân Sửa Chữa Điện Thoại</title>
+  <style>
+    :root {
+      --gold-dark: #8a6421;
+      --gold-main: #c59b27;
+      --gold-light: #f3dc8a;
+      --crimson: #8b1e24;
+      --crimson-dark: #5a1014;
+      --navy: #142238;
+      --paper: #fffdf7;
+      --paper-edge: #f5eedc;
+      --stamp-red: #d62828;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Times New Roman", Georgia, "DejaVu Serif", serif;
+      background: radial-gradient(circle at top, #1f2d46 0%, #0e1524 100%);
+      color: var(--navy);
+      min-height: 100vh;
+      padding: 24px 16px 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    /* Confetti Canvas */
+    #confetti-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    /* Top Control Panel */
+    .editor-panel {
+      width: 100%;
+      max-width: 980px;
+      background: rgba(255, 255, 255, 0.96);
+      border: 2px solid var(--gold-main);
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      transition: all 0.3s ease;
+    }
+
+    .editor-panel.hidden {
+      display: none;
+    }
+
+    .editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .editor-header h2 {
+      font-size: 1.05rem;
+      color: #1e293b;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .badge-tip {
+      background: #fef3c7;
+      color: #92400e;
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    .editor-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .field-group label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #475569;
+    }
+
+    .field-group input,
+    .field-group select,
+    .field-group textarea {
+      padding: 8px 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      color: #0f172a;
+      background: #fff;
+      font-family: inherit;
+    }
+
+    .field-group input:focus,
+    .field-group select:focus,
+    .field-group textarea:focus {
+      outline: none;
+      border-color: var(--gold-main);
+      box-shadow: 0 0 0 3px rgba(197, 155, 39, 0.2);
+    }
+
+    .action-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding-top: 8px;
+      border-top: 1px dashed #cbd5e1;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .btn {
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      padding: 9px 14px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.15s;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #b91c1c, #7f1d1d);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(185, 28, 28, 0.35);
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, #d97706, #92400e);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.35);
+    }
+
+    .btn-outline {
+      background: #f8fafc;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+    }
+
+    .btn-outline:hover {
+      background: #f1f5f9;
+    }
+
+    .toggle-editor-btn {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      z-index: 100;
+      background: rgba(20, 34, 56, 0.9);
+      color: #f3dc8a;
+      border: 1px solid var(--gold-main);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      font-family: system-ui, sans-serif;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Certificate Outer Wrapper */
+    .certificate-wrapper {
+      width: 100%;
+      max-width: 980px;
+      background: linear-gradient(135deg, #8a6421 0%, #dfc068 25%, #9e7524 50%, #f5df93 75%, #8a6421 100%);
+      padding: 14px;
+      border-radius: 8px;
+      box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.65),
+        0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+      position: relative;
+    }
+
+    .certificate-inner {
+      background:
+        radial-gradient(circle at center, rgba(255, 253, 247, 0.94) 0%, rgba(246, 237, 214, 0.98) 100%);
+      border: 4px double var(--crimson);
+      padding: 36px 44px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle Guilloche / Watermark Pattern */
+    .watermark-bg {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      opacity: 0.055;
+      z-index: 0;
+    }
+
+    .watermark-bg svg {
+      width: 480px;
+      height: 480px;
+    }
+
+    /* Ornate Corner SVGs */
+    .corner {
+      position: absolute;
+      width: 82px;
+      height: 82px;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .corner-tl { top: 8px; left: 8px; }
+    .corner-tr { top: 8px; right: 8px; transform: scaleX(-1); }
+    .corner-bl { bottom: 8px; left: 8px; transform: scaleY(-1); }
+    .corner-br { bottom: 8px; right: 8px; transform: scale(-1, -1); }
+
+    /* Certificate Content Layout */
+    .cert-content {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+    }
+
+    .top-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 12px;
+      font-size: 0.92rem;
+    }
+
+    .org-block {
+      flex: 1;
+      text-align: center;
+    }
+
+    .org-parent {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #4b5563;
+      font-weight: 700;
+    }
+
+    .org-name {
+      font-size: 0.98rem;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: var(--crimson);
+      margin-top: 3px;
+      letter-spacing: 0.5px;
+    }
+
+    .motto-block {
+      flex: 1;
+      text-align: center;
+    }
+
+    .motto-main {
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.6px;
+    }
+
+    .motto-sub {
+      font-size: 0.85rem;
+      font-style: italic;
+      margin-top: 3px;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 4px;
+    }
+
+    .motto-sub::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 20%;
+      right: 20%;
+      height: 1px;
+      background: var(--navy);
+    }
+
+    /* Emblem Crest */
+    .crest-container {
+      margin: 6px auto 8px;
+      width: 68px;
+      height: 68px;
+    }
+
+    .cert-title-sub {
+      font-size: 0.9rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .cert-title-main {
+      font-size: 2.55rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--crimson);
+      letter-spacing: 2px;
+      text-shadow: 1px 2px 0px rgba(212, 175, 55, 0.35);
+      line-height: 1.15;
+      margin-bottom: 6px;
+    }
+
+    .cert-major {
+      font-size: 1.22rem;
+      font-weight: 700;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      background: linear-gradient(90deg, transparent, rgba(197, 155, 39, 0.22), transparent);
+      padding: 6px 20px;
+      display: inline-block;
+      margin-bottom: 14px;
+      border-top: 1px solid rgba(138, 100, 33, 0.4);
+      border-bottom: 1px solid rgba(138, 100, 33, 0.4);
+    }
+
+    .present-line {
+      font-size: 1.02rem;
+      font-style: italic;
+      color: #374151;
+      margin-bottom: 6px;
+    }
+
+    .recipient-name {
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: #142238;
+      font-style: italic;
+      margin: 4px 0 12px;
+      padding: 0 20px 6px;
+      display: inline-block;
+      border-bottom: 2px dashed var(--gold-main);
+      letter-spacing: 0.5px;
+    }
+
+    .achievement-desc {
+      max-width: 740px;
+      margin: 0 auto 16px;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #1f2937;
+    }
+
+    /* Skills / Subject Modules Table */
+    .skills-box {
+      max-width: 760px;
+      margin: 0 auto 18px;
+      background: rgba(255, 255, 255, 0.65);
+      border: 1px solid rgba(138, 100, 33, 0.45);
+      border-radius: 6px;
+      padding: 12px 18px;
+      text-align: left;
+    }
+
+    .skills-box-title {
+      font-size: 0.84rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--crimson);
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px 20px;
+      font-size: 0.92rem;
+    }
+
+    .skill-item {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dotted #cbd5e1;
+      padding-bottom: 3px;
+    }
+
+    .skill-score {
+      font-weight: 700;
+      color: var(--crimson);
+    }
+
+    /* Meta Row: Grade, Mode, Code */
+    .meta-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 28px;
+      margin: 14px 0 22px;
+      font-size: 1rem;
+    }
+
+    .meta-pill {
+      background: #fff;
+      border: 1.5px solid var(--gold-main);
+      padding: 6px 18px;
+      border-radius: 999px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .meta-pill strong {
+      color: var(--crimson);
+    }
+
+    /* Footer Signatures & Official Red Stamp */
+    .cert-footer {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr 1fr;
+      align-items: end;
+      margin-top: 10px;
+      padding-top: 10px;
+      gap: 12px;
+    }
+
+    .qr-verify {
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      font-size: 0.78rem;
+      color: #4b5563;
+    }
+
+    .qr-box {
+      width: 74px;
+      height: 74px;
+      border: 1px solid var(--gold-dark);
+      padding: 4px;
+      background: #fff;
+    }
+
+    /* Gold Ribbon Seal */
+    .gold-seal-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gold-medal-svg {
+      width: 115px;
+      height: 125px;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.22));
+    }
+
+    /* Signature + Red Stamp */
+    .signature-col {
+      text-align: center;
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    .issue-date {
+      font-style: italic;
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+
+    .signer-role {
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 0.92rem;
+      color: var(--navy);
+      margin-bottom: 48px;
+    }
+
+    .signature-handwriting {
+      font-family: "Brush Script MT", "Segoe Script", "Apple Chancery", cursive;
+      font-size: 1.85rem;
+      color: #1d4ed8;
+      position: absolute;
+      left: 50%;
+      top: 52px;
+      transform: translateX(-35%) rotate(-6deg);
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .signer-name {
+      font-weight: 700;
+      font-size: 1.02rem;
+      color: var(--crimson-dark);
+      position: relative;
+      z-index: 3;
+    }
+
+    /* Red Circular Stamp Overlay */
+    .red-stamp {
+      position: absolute;
+      width: 128px;
+      height: 128px;
+      left: 6%;
+      top: 18px;
+      transform: rotate(-14deg);
+      pointer-events: none;
+      opacity: 0.86;
+      z-index: 4;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #0f172a;
+      color: #fff;
+      padding: 12px 22px;
+      border-radius: 999px;
+      border: 1px solid var(--gold-main);
+      font-family: system-ui, sans-serif;
+      font-size: 0.9rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 2000;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      .certificate-inner {
+        padding: 24px 16px;
+      }
+      .top-header-row {
+        flex-direction: column;
+        align-items: center;
+      }
+      .cert-title-main {
+        font-size: 1.75rem;
+      }
+      .recipient-name {
+        font-size: 1.85rem;
+      }
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+      .cert-footer {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        gap: 20px;
+      }
+      .qr-verify {
+        align-items: center;
+        text-align: center;
+        order: 3;
+      }
+      .signature-col {
+        width: 240px;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+        padding: 0;
+      }
+      .editor-panel,
+      .toggle-editor-btn,
+      #confetti-canvas,
+      .toast {
+        display: none !important;
+      }
+      .certificate-wrapper {
+        box-shadow: none;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- BẢNG CHỈNH SỬA NHANH -->
+  <div class="editor-panel" id="editorPanel">
+    <div class="editor-header">
+      <h2>🛠️ Bảng Chỉnh Sửa Bằng Tốt Nghiệp (Sửa tới đâu nhảy chữ tới đó)</h2>
+      <span class="badge-tip">Mẹo: Điền xong bấm "Tải file HTML đã đóng khung" để up thẳng lên Vercel!</span>
+    </div>
+
+    <div class="editor-grid">
+      <div class="field-group">
+        <label for="inpName">👤 Họ và tên người nhận bằng</label>
+        <input type="text" id="inpName" value="Nguyễn Thị Kiều Chốt Đơn" placeholder="Nhập tên bạn bè..." />
+      </div>
+
+      <div class="field-group">
+        <label for="inpSchool">🏛️ Tên Học Viện / Cửa Hàng cấp bằng</label>
+        <input type="text" id="inpSchool" value="HỌC VIỆN BÁO GIÁ & SỬA CHỮA TÁO KHUYẾT" />
+      </div>
+
+      <div class="field-group">
+        <label for="inpMajor">🎓 Danh hiệu / Chuyên ngành</label>
+        <input type="text" id="inpMajor" value="LỄ TÂN TIẾP NHẬN & TƯ VẤN SỬA CHỮA ĐIỆN THOẠI CAO CẤP" />
+      </div>
+
+      <div class="field-group">
+        <label for="inpRank">🏆 Xếp loại tốt nghiệp</label>
+        <select id="inpRank">
+          <option value="Xuất Sắc Đỉnh Nóc Kịch Trần">Xuất Sắc Đỉnh Nóc Kịch Trần</option>
+          <option value="Thần Thái Báo Giá Vàng (9.9/10)">Thần Thái Báo Giá Vàng (9.9/10)</option>
+          <option value="Giỏi (Khách Mắng Vẫn Cười Tươi)">Giỏi (Khách Mắng Vẫn Cười Tươi)</option>
+          <option value="Bậc Thầy Nhìn Mặt Đoán Bệnh Máy">Bậc Thầy Nhìn Mặt Đoán Bệnh Máy</option>
+        </select>
+      </div>
+
+      <div class="field-group">
+        <label for="inpDesc">📜 Lời chứng nhận (có thể tự sửa cho lầy lội)</label>
+        <input type="text" id="inpDesc" value="Đã hoàn thành xuất sắc khóa huấn luyện thực chiến: Nhìn khách bước vào đoán ngay máy rơi nước hay vỡ màn, báo giá thay linh kiện không chớp mắt và trấn an khách hàng khi kỹ thuật làm trễ hẹn." />
+      </div>
+
+      <div class="field-group">
+        <label for="inpSigner">✍️ Tên Hiệu Trưởng / Chủ Tiệm ký tên</label>
+        <input type="text" id="inpSigner" value="GS.TS. Trần Ép Kính" />
+      </div>
+
+      <div class="field-group">
+        <label for="inpDate">📅 Ngày cấp bằng</label>
+        <input type="text" id="inpDate" value="Ngày 01 tháng 10 năm 2026" />
+      </div>
+
+      <div class="field-group">
+        <label for="inpCode">🔖 Số hiệu văn bằng</label>
+        <input type="text" id="inpCode" value="LT-FULL-9999VIP" />
+      </div>
+    </div>
+
+    <div class="action-bar">
+      <div class="btn-group">
+        <button class="btn btn-primary" type="button" onclick="launchConfetti()">
+          🎉 Bắn Pháo Giấy Chúc Mừng
+        </button>
+        <button class="btn btn-gold" type="button" onclick="downloadLockedHTML()">
+          💾 Tải file index.html (Đã khóa tên này) để up Vercel
+        </button>
+      </div>
+      <div class="btn-group">
+        <button class="btn btn-outline" type="button" onclick="copyShareUrl()">
+          🔗 Copy Link chia sẻ
+        </button>
+        <button class="btn btn-outline" type="button" onclick="window.print()">
+          🖨️ In / Lưu PDF
+        </button>
+        <button class="btn btn-outline" type="button" onclick="toggleEditor()">
+          👁️ Ẩn bảng sửa (Xem như thật)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- KHUNG BẰNG TỐT NGHIỆP -->
+  <div class="certificate-wrapper">
+    <div class="certificate-inner">
+
+      <!-- Hình chìm ở giữa -->
+      <div class="watermark-bg">
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="88" stroke="#8a6421" stroke-width="4" stroke-dasharray="6 4"/>
+          <circle cx="100" cy="100" r="72" stroke="#8a6421" stroke-width="2"/>
+          <rect x="74" y="45" width="52" height="96" rx="8" stroke="#8a6421" stroke-width="4"/>
+          <circle cx="100" cy="129" r="4" fill="#8a6421"/>
+          <path d="M60 155 L140 155" stroke="#8a6421" stroke-width="4"/>
+        </svg>
+      </div>
+
+      <!-- 4 Góc Hoa Văn -->
+      <svg class="corner corner-tl" viewBox="0 0 100 100" fill="none">
+        <path d="M4 4 H92 V12 H12 V92 H4 V4 Z" fill="#8b1e24"/>
+        <path d="M18 18 H65 V23 H23 V65 H18 V18 Z" fill="#c59b27"/>
+        <circle cx="32" cy="32" r="5" fill="#8b1e24"/>
+      </svg>
+      <svg class="corner corner-tr" viewBox="0 0 100 100" fill="none">
+        <path d="M4 4 H92 V12 H12 V92 H4 V4 Z" fill="#8b1e24"/>
+        <path d="M18 18 H65 V23 H23 V65 H18 V18 Z" fill="#c59b27"/>
+        <circle cx="32" cy="32" r="5" fill="#8b1e24"/>
+      </svg>
+      <svg class="corner corner-bl" viewBox="0 0 100 100" fill="none">
+        <path d="M4 4 H92 V12 H12 V92 H4 V4 Z" fill="#8b1e24"/>
+        <path d="M18 18 H65 V23 H23 V65 H18 V18 Z" fill="#c59b27"/>
+        <circle cx="32" cy="32" r="5" fill="#8b1e24"/>
+      </svg>
+      <svg class="corner corner-br" viewBox="0 0 100 100" fill="none">
+        <path d="M4 4 H92 V12 H12 V92 H4 V4 Z" fill="#8b1e24"/>
+        <path d="M18 18 H65 V23 H23 V65 H18 V18 Z" fill="#c59b27"/>
+        <circle cx="32" cy="32" r="5" fill="#8b1e24"/>
+      </svg>
+
+      <div class="cert-content">
+        <!-- Quốc hiệu & Đơn vị -->
+        <div class="top-header-row">
+          <div class="org-block">
+            <div class="org-parent">HIỆP HỘI TIẾP NHẬN &amp; CHĂM SÓC DẾ YÊU VIỆT NAM</div>
+            <div class="org-name" id="outSchool">HỌC VIỆN BÁO GIÁ &amp; SỬA CHỮA TÁO KHUYẾT</div>
+          </div>
+          <div class="motto-block">
+            <div class="motto-main">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
+            <div class="motto-sub">Độc lập - Tự do - Hạnh phúc</div>
+          </div>
+        </div>
+
+        <!-- Huy hiệu điện thoại + tua vít -->
+        <div class="crest-container">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="45" fill="#8b1e24" stroke="#c59b27" stroke-width="4"/>
+            <circle cx="50" cy="50" r="38" fill="none" stroke="#f3dc8a" stroke-width="1.5" stroke-dasharray="3 3"/>
+            <!-- Phone Icon -->
+            <rect x="36" y="22" width="28" height="52" rx="4" fill="#fffdf7" stroke="#c59b27" stroke-width="2.5"/>
+            <line x1="45" y1="27" x2="55" y2="27" stroke="#8b1e24" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="50" cy="68" r="2.5" fill="#8b1e24"/>
+            <!-- Check / Heart inside screen -->
+            <path d="M43 46 L48 51 L58 39" fill="none" stroke="#15803d" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <div class="cert-title-sub">VĂN BẰNG CHỨNG NHẬN DANH GIÁ</div>
+        <h1 class="cert-title-main">BẰNG TỐT NGHIỆP ĐẠI HỌC</h1>
+        <div class="cert-major" id="outMajor">LỄ TÂN TIẾP NHẬN &amp; TƯ VẤN SỬA CHỮA ĐIỆN THOẠI CAO CẤP</div>
+
+        <p class="present-line">Hội đồng Thẩm định Tay nghề &amp; Thần thái Lễ tân trân trọng trao bằng cho:</p>
+        <div class="recipient-name" id="outName">Nguyễn Thị Kiều Chốt Đơn</div>
+
+        <p class="achievement-desc" id="outDesc">
+          Đã hoàn thành xuất sắc khóa huấn luyện thực chiến: Nhìn khách bước vào đoán ngay máy rơi nước hay vỡ màn, báo giá thay linh kiện không chớp mắt và trấn an khách hàng khi kỹ thuật làm trễ hẹn.
+        </p>
+
+        <!-- Bảng điểm học phần vui nhộn -->
+        <div class="skills-box">
+          <div class="skills-box-title">BẢNG ĐIỂM CÁC HỌC PHẦN CHUYÊN MÔN ĐÃ ĐẠT CHUẨN</div>
+          <div class="skills-grid">
+            <div class="skill-item">
+              <span>1. Phân biệt Ép kính &amp; Thay màn trong 0.5s</span>
+              <span class="skill-score">10.0 / 10 (A+)</span>
+            </div>
+            <div class="skill-item">
+              <span>2. Nghệ thuật hỏi mật khẩu màn hình khéo léo</span>
+              <span class="skill-score">10.0 / 10 (A+)</span>
+            </div>
+            <div class="skill-item">
+              <span>3. Tâm lý chiến khi khách bảo "Máy tự nhiên bị"</span>
+              <span class="skill-score">9.9 / 10 (A+)</span>
+            </div>
+            <div class="skill-item">
+              <span>4. Kỹ năng viết phiếu tiếp nhận chữ đẹp rõ nét</span>
+              <span class="skill-score">10.0 / 10 (A+)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Thông tin Xếp loại -->
+        <div class="meta-row">
+          <div class="meta-pill">Xếp loại: <strong id="outRank">Xuất Sắc Đỉnh Nóc Kịch Trần</strong></div>
+          <div class="meta-pill">Hình thức đào tạo: <strong>Chính quy Thực chiến 24/7</strong></div>
+          <div class="meta-pill">Số hiệu bằng: <strong id="outCode">LT-FULL-9999VIP</strong></div>
+        </div>
+
+        <!-- Chân trang: QR + Huy chương vàng + Chữ ký & Dấu đỏ -->
+        <div class="cert-footer">
+          <div class="qr-verify">
+            <svg class="qr-box" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <rect width="100" height="100" fill="#fff"/>
+              <rect x="8" y="8" width="26" height="26" fill="none" stroke="#142238" stroke-width="6"/>
+              <rect x="16" y="16" width="10" height="10" fill="#142238"/>
+              <rect x="66" y="8" width="26" height="26" fill="none" stroke="#142238" stroke-width="6"/>
+              <rect x="74" y="16" width="10" height="10" fill="#142238"/>
+              <rect x="8" y="66" width="26" height="26" fill="none" stroke="#142238" stroke-width="6"/>
+              <rect x="16" y="74" width="10" height="10" fill="#142238"/>
+              <rect x="44" y="12" width="8" height="8" fill="#142238"/>
+              <rect x="44" y="28" width="12" height="8" fill="#142238"/>
+              <rect x="40" y="44" width="20" height="20" fill="#8b1e24"/>
+              <rect x="14" y="44" width="16" height="8" fill="#142238"/>
+              <rect x="68" y="46" width="18" height="8" fill="#142238"/>
+              <rect x="44" y="72" width="12" height="18" fill="#142238"/>
+              <rect x="66" y="66" width="12" height="12" fill="#142238"/>
+              <rect x="80" y="78" width="12" height="14" fill="#142238"/>
+            </svg>
+            <span>Xác thực văn bằng điện tử</span>
+            <span>Giá trị: Trọn đời (Không bảo hành)</span>
+          </div>
+
+          <div class="gold-seal-col">
+            <svg class="gold-medal-svg" viewBox="0 0 120 130" xmlns="http://www.w3.org/2000/svg">
+              <!-- Ribbons -->
+              <polygon points="38,75 22,126 42,116 54,128 56,78" fill="#8b1e24"/>
+              <polygon points="82,75 98,126 78,116 66,128 64,78" fill="#6b1419"/>
+              <!-- Starburst Seal -->
+              <circle cx="60" cy="52" r="42" fill="#c59b27" stroke="#8a6421" stroke-width="3"/>
+              <circle cx="60" cy="52" r="34" fill="#f3dc8a" stroke="#8a6421" stroke-width="1.5" stroke-dasharray="4 2"/>
+              <text x="60" y="46" text-anchor="middle" font-size="9" font-weight="bold" fill="#8b1e24">CHỨNG NHẬN</text>
+              <text x="60" y="59" text-anchor="middle" font-size="11" font-weight="900" fill="#142238">100% UY TÍN</text>
+              <text x="60" y="71" text-anchor="middle" font-size="8" font-weight="bold" fill="#8a6421">★ ★ ★ ★ ★</text>
+            </svg>
+          </div>
+
+          <div class="signature-col">
+            <div class="issue-date" id="outDate">Ngày 01 tháng 10 năm 2026</div>
+            <div class="signer-role">CHỦ TỊCH HỘI ĐỒNG CẤP BẰNG</div>
+
+            <!-- Con dấu đỏ tròn -->
+            <svg class="red-stamp" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="70" cy="70" r="62" fill="none" stroke="#d62828" stroke-width="4"/>
+              <circle cx="70" cy="70" r="56" fill="none" stroke="#d62828" stroke-width="1.5"/>
+              <circle cx="70" cy="70" r="36" fill="none" stroke="#d62828" stroke-width="2"/>
+              <text x="70" y="31" text-anchor="middle" fill="#d62828" font-size="9.5" font-weight="bold">HỘI ĐỒNG GIÁM ĐỊNH</text>
+              <text x="70" y="66" text-anchor="middle" fill="#d62828" font-size="11" font-weight="900">ĐÃ KIỂM ĐỊNH</text>
+              <text x="70" y="80" text-anchor="middle" fill="#d62828" font-size="8.5" font-weight="bold">CHỐT ĐƠN THẦN SẦU</text>
+              <text x="70" y="116" text-anchor="middle" fill="#d62828" font-size="9" font-weight="bold">★ UY TÍN SỐ 1 ★</text>
+            </svg>
+
+            <div class="signature-handwriting" id="outSignHand">Trần Ép Kính</div>
+            <div class="signer-name" id="outSigner">GS.TS. Trần Ép Kính</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Nút bật/tắt chỉnh sửa góc phải dưới -->
+  <button class="toggle-editor-btn" id="floatingToggleBtn" onclick="toggleEditor()">
+    ⚙️ Chỉnh sửa thông tin bằng
+  </button>
+
+  <div class="toast" id="toastMsg">Đã sao chép!</div>
+
+  <script>
+    const fields = [
+      { input: 'inpName', output: 'outName', param: 'name' },
+      { input: 'inpSchool', output: 'outSchool', param: 'school' },
+      { input: 'inpMajor', output: 'outMajor', param: 'major' },
+      { input: 'inpRank', output: 'outRank', param: 'rank' },
+      { input: 'inpDesc', output: 'outDesc', param: 'desc' },
+      { input: 'inpSigner', output: 'outSigner', param: 'signer' },
+      { input: 'inpDate', output: 'outDate', param: 'date' },
+      { input: 'inpCode', output: 'outCode', param: 'code' }
+    ];
+
+    function syncFields() {
+      fields.forEach(({ input, output }) => {
+        const elIn = document.getElementById(input);
+        const elOut = document.getElementById(output);
+        if (elIn && elOut) {
+          elOut.textContent = elIn.value;
+        }
+      });
+      // Cập nhật chữ ký viết tay theo tên người ký
+      const signerVal = document.getElementById('inpSigner').value || '';
+      const shortSign = signerVal.replace(/^(GS\.TS\.|TS\.|ThS\.|CEO|Chủ tiệm)\s*/i, '');
+      document.getElementById('outSignHand').textContent = shortSign || signerVal;
+    }
+
+    // Gắn sự kiện gõ phím tới đâu cập nhật tới đó
+    fields.forEach(({ input }) => {
+      const el = document.getElementById(input);
+      if (el) {
+        el.addEventListener('input', syncFields);
+        el.addEventListener('change', syncFields);
+      }
+    });
+
+    // Đọc thông tin từ URL nếu gửi link cho bạn bè
+    function loadFromUrlParams() {
+      const params = new URLSearchParams(window.location.search);
+      let hasCustomParam = false;
+      fields.forEach(({ input, param }) => {
+        if (params.has(param)) {
+          document.getElementById(input).value = params.get(param);
+          hasCustomParam = true;
+        }
+      });
+      syncFields();
+
+      // Nếu mở qua link chia sẻ (?view=1) thì ẩn khung chỉnh sửa cho bất ngờ
+      if (params.get('view') === '1' || hasCustomParam) {
+        document.getElementById('editorPanel').classList.add('hidden');
+      }
+    }
+
+    function toggleEditor() {
+      const panel = document.getElementById('editorPanel');
+      panel.classList.toggle('hidden');
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toastMsg');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2800);
+    }
+
+    function copyShareUrl() {
+      const params = new URLSearchParams();
+      params.set('view', '1');
+      fields.forEach(({ input, param }) => {
+        params.set(param, document.getElementById(input).value);
+      });
+      const shareUrl = window.location.origin + window.location.pathname + '?' + params.toString();
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(shareUrl).then(() => {
+          showToast('✅ Đã copy link! Khi up lên Vercel bạn gửi link này là hiện đúng tên người nhận!');
+        }).catch(() => {
+          prompt('Copy đường link dưới đây:', shareUrl);
+        });
+      } else {
+        prompt('Copy đường link dưới đây:', shareUrl);
+      }
+    }
+
+    // Xuất ra file index.html đã khóa cứng thông tin hiện tại để người dùng kéo thả lên Vercel/Netlify
+    function downloadLockedHTML() {
+      syncFields();
+      const clone = document.documentElement.cloneNode(true);
+      // Cập nhật value mặc định trong các ô input của bản clone
+      fields.forEach(({ input }) => {
+        const currentVal = document.getElementById(input).value;
+        const cloneInput = clone.querySelector('#' + input);
+        if (cloneInput) {
+          cloneInput.setAttribute('value', currentVal);
+        }
+      });
+      // Ẩn sẵn bảng chỉnh sửa để khi người nhận mở web chỉ thấy Bằng Tốt Nghiệp + Pháo giấy
+      const clonePanel = clone.querySelector('#editorPanel');
+      if (clonePanel) {
+        clonePanel.classList.add('hidden');
+      }
+      const htmlContent = '<!DOCTYPE html>\n' + clone.outerHTML;
+      const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'index.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('🎉 Đã tải file index.html! Giờ bạn chỉ cần kéo file này lên Vercel hoặc Netlify!');
+    }
+
+    // Hiệu ứng bắn pháo giấy (Confetti)
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let animId = null;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function launchConfetti() {
+      const colors = ['#c59b27', '#d62828', '#1d4ed8', '#15803d', '#f59e0b', '#ec4899'];
+      for (let i = 0; i < 110; i++) {
+        particles.push({
+          x: window.innerWidth / 2 + (Math.random() - 0.5) * 200,
+          y: window.innerHeight * 0.45,
+          vx: (Math.random() - 0.5) * 16,
+          vy: -Math.random() * 15 - 5,
+          size: Math.random() * 8 + 5,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rot: Math.random() * 360,
+          rotSpeed: (Math.random() - 0.5) * 12,
+          gravity: 0.32
+        });
+      }
+      if (!animId) {
+        animateConfetti();
+      }
+    }
+
+    function animateConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((p) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += p.gravity;
+        p.rot += p.rotSpeed;
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate((p.rot * Math.PI) / 180);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.65);
+        ctx.restore();
+      });
+      particles = particles.filter((p) => p.y < canvas.height + 40);
+      if (particles.length > 0) {
+        animId = requestAnimationFrame(animateConfetti);
+      } else {
+        animId = null;
+      }
+    }
+
+    // Khởi chạy ban đầu
+    loadFromUrlParams();
+    setTimeout(launchConfetti, 400);
+  </script>
+</body>
+</html>
