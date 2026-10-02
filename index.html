@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="vi">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="vi"><head><style>body {transition: opacity ease-in 0.2s; } 
+body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relative; } 
+</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bằng Tốt Nghiệp Lễ Tân Sửa Chữa Điện Thoại - Asmartcare</title>
 
   <!-- ============================================================================
@@ -13,62 +14,40 @@
        ============================================================================ -->
   <script id="configData">
     const THONG_TIN_BANG = {
-      // 1. ẢNH HỌC VIÊN (Dòng 17):
-      // Cách A: Up thêm 1 file ảnh (ví dụ "anh.jpg") lên GitHub cùng chỗ với index.html rồi điền "anh.jpg"
-      // Cách B: Dán link ảnh trên mạng vào giữa dấu ngoặc kép ""
-      anhHocVien: "https://i.ibb.co/bGLdnbV/gpt-image-1-5-high-fidelity-b-bi-n-nh-th-nh-nh-t.png",
-
-      // 2. HỌ VÀ TÊN HỌC VIÊN NHẬN BẰNG (Dòng 22):
-      tenHocVien: "Nguyễn Thị Kiều Oanh",
-
-      // 3. NGÀY SINH / MÃ HỌC VIÊN DƯỚI ẢNH THẺ (Dòng 25):
-      thongTinPhuAnh: "Khóa: K2026 - Lễ Tân Vàng",
-
-      // 4. TÊN ĐƠN VỊ / HỌC VIỆN CẤP BẰNG (Dòng 28):
-      tenDonViCap: "HỌC VIỆN ĐÀO TẠO LỄ TÂN ASMARTCARE",
-
-      // 5. TÊN HIỆP HỘI CẤP TRÊN (Dòng 31):
-      tenHiepHoi: "HIỆP HỘI CHĂM SÓC DẾ YÊU VIỆT NAM",
-
-      // 6. CHUYÊN NGÀNH / DANH HIỆU ĐÀO TẠO (Dòng 34):
-      chuyenNganh: "LỄ TÂN TIẾP NHẬN & TƯ VẤN SỬA CHỮA ĐIỆN THOẠI",
-
-      // 7. LỜI CHỨNG NHẬN TRÊN BẰNG (Dòng 37):
-      loiChungNhan: "Đã hoàn thành xuất sắc khóa huấn luyện thực chiến: Nhìn khách bước vào đoán ngay tình trạng lỗi, báo giá thay linh kiện không chớp mắt và trấn an khách hàng khi kỹ thuật làm trễ hẹn.",
-
-      // 8. XẾP LOẠI TỐT NGHIỆP (Dòng 40):
-      xepLoai: "Xuất Sắc Đỉnh Nóc Kịch Trần",
-
-      // 9. HÌNH THỨC ĐÀO TẠO (Dòng 43):
-      hinhThucDaoTao: "Chính quy",
-
-      // 10. SỐ HIỆU VĂN BẰNG (Dòng 46):
-      soHieuBang: "ASM-LT-9999VIP",
-
-      // 11. NGÀY CẤP BẰNG (Dòng 49):
-      ngayCap: "Ngày 01 tháng 10 năm 2026",
-
-      // 12. CHỨC VỤ NGƯỜI KÝ CẤP BẰNG (Dòng 52):
-      chucVuNguoiKy: "QUẢN LÝ KỸ THUẬT ASMARTCARE",
-
-      // 13. HỌ TÊN NGƯỜI CẤP BẰNG / HIỆU TRƯỞNG (Dòng 55):
-      tenNguoiKy: "Phạm Thị Mỹ Lệ",
-
-      // 14. CHỮ KÝ VIẾT TAY (Dòng 58):
-      chuKyVietTay: "Phạm Thị Mỹ Lệ",
-
-      // 15. CÁC MÔN HỌC TRONG BẢNG ĐIỂM (Dòng 61 - 66):
-      bangDiem: [
-        { mon: "1. Nhận biết lỗi, báo giá sửa chữa trong 0.5s", diem: "10.0 / 10 (A+)" },
-        { mon: "2. Nghệ thuật hỏi mật khẩu màn hình khéo léo", diem: "10.0 / 10 (A+)" },
-        { mon: "3. Tâm lý chiến khi khách bảo \"Máy tự nhiên bị\"", diem: "9.9 / 10 (A+)" },
-        { mon: "4. Kỹ năng viết phiếu tiếp nhận chữ đẹp rõ nét", diem: "10.0 / 10 (A+)" }
+      "anhHocVien": "https://i.ibb.co/bGLdnbV/gpt-image-1-5-high-fidelity-b-bi-n-nh-th-nh-nh-t.png",
+      "tenHocVien": "Hà Thị Kiều Oanh",
+      "thongTinPhuAnh": "Khóa: K2026 - Lễ Tân Vàng",
+      "tenDonViCap": "HỌC VIỆN ĐÀO TẠO LỄ TÂN ASMARTCARE",
+      "tenHiepHoi": "HIỆP HỘI CHĂM SÓC DẾ YÊU VIỆT NAM",
+      "chuyenNganh": "LỄ TÂN TIẾP NHẬN & TƯ VẤN SỬA CHỮA ĐIỆN THOẠI",
+      "loiChungNhan": "Đã hoàn thành xuất sắc khóa huấn luyện thực chiến: Nhìn khách bước vào đoán ngay tình trạng lỗi, báo giá thay linh kiện không chớp mắt và trấn an khách hàng khi kỹ thuật làm trễ hẹn.",
+      "xepLoai": "Xuất Sắc Đỉnh Nóc Kịch Trần",
+      "hinhThucDaoTao": "Chính quy",
+      "soHieuBang": "ASM-LT-9999VIP",
+      "ngayCap": "Ngày 01 tháng 10 năm 2026",
+      "chucVuNguoiKy": "QUẢN LÝ KỸ THUẬT ASMARTCARE",
+      "tenNguoiKy": "Phạm Thị Mỹ Lệ",
+      "chuKyVietTay": "Phạm Thị Mỹ Lệ",
+      "bangDiem": [
+            {
+                  "mon": "1. Nhận biết lỗi, báo giá sửa chữa trong 0.5s",
+                  "diem": "10.0 / 10 (A+)"
+            },
+            {
+                  "mon": "2. Nghệ thuật hỏi mật khẩu màn hình khéo léo",
+                  "diem": "10.0 / 10 (A+)"
+            },
+            {
+                  "mon": "3. Tâm lý chiến khi khách bảo \"Máy tự nhiên bị\"",
+                  "diem": "9.9 / 10 (A+)"
+            },
+            {
+                  "mon": "4. Kỹ năng viết phiếu tiếp nhận chữ đẹp rõ nét",
+                  "diem": "10.0 / 10 (A+)"
+            }
       ],
-
-      // 16. MẬT KHẨU BÍ MẬT CỦA BẠN (Dòng 69):
-      // Khi mở web, bấm 5 lần liên tiếp vào CON DẤU ĐỎ và nhập mật khẩu này để mở bảng tải ảnh nhanh
-      matKhauAdmin: "asmartcare"
-    };
+      "matKhauAdmin": "asmartcare"
+};
   </script>
   <!-- ================= KẾT THÚC KHU VỰC CHỈNH SỬA THÔNG TIN ================= -->
 
@@ -741,7 +720,7 @@
 </head>
 <body>
 
-  <canvas id="confetti-canvas"></canvas>
+  <canvas id="confetti-canvas" width="1920" height="911"></canvas>
 
   <!-- BẢNG QUẢN TRỊ BÍ MẬT (MẶC ĐỊNH ẨN HOÀN TOÀN - CHỈ HIỆN KHI BẤM 5 LẦN VÀO DẤU ĐỎ & NHẬP MẬT KHẨU) -->
   <div class="admin-panel" id="adminPanel">
@@ -753,41 +732,41 @@
     <div class="admin-grid">
       <div class="field-group">
         <label>📷 Chọn ảnh học viên từ máy (Tự nhúng vào code)</label>
-        <input type="file" id="admPhotoFile" accept="image/*" />
+        <input type="file" id="admPhotoFile" accept="image/*">
       </div>
       <div class="field-group">
         <label>👤 Họ và tên học viên</label>
-        <input type="text" id="admName" />
+        <input type="text" id="admName">
       </div>
       <div class="field-group">
         <label>🏛️ Tên Đơn vị cấp bằng</label>
-        <input type="text" id="admSchool" />
+        <input type="text" id="admSchool">
       </div>
       <div class="field-group">
         <label>🎓 Chuyên ngành</label>
-        <input type="text" id="admMajor" />
+        <input type="text" id="admMajor">
       </div>
       <div class="field-group">
         <label>🏆 Xếp loại tốt nghiệp</label>
-        <input type="text" id="admRank" />
+        <input type="text" id="admRank">
       </div>
       <div class="field-group">
         <label>✍️ Tên Người cấp bằng (Ký tên)</label>
-        <input type="text" id="admSigner" />
+        <input type="text" id="admSigner">
       </div>
       <div class="field-group">
         <label>📅 Ngày cấp bằng</label>
-        <input type="text" id="admDate" />
+        <input type="text" id="admDate">
       </div>
       <div class="field-group">
         <label>📜 Lời chứng nhận</label>
-        <input type="text" id="admDesc" />
+        <input type="text" id="admDesc">
       </div>
     </div>
 
     <div class="admin-actions">
       <button class="btn btn-success" type="button" onclick="exportUpdatedHTML()">
-        💾 Tải file index.html mới (Đã lưu sẵn Ảnh & Thông tin này)
+        💾 Tải file index.html mới (Đã lưu sẵn Ảnh &amp; Thông tin này)
       </button>
       <button class="btn btn-outline" type="button" onclick="document.getElementById('adminPanel').classList.remove('unlocked')">
         ✖ Đóng bảng Admin
@@ -801,42 +780,42 @@
 
       <div class="watermark-bg">
         <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="100" cy="100" r="88" stroke="#8a6421" stroke-width="4" stroke-dasharray="6 4"/>
-          <circle cx="100" cy="100" r="72" stroke="#8a6421" stroke-width="2"/>
-          <rect x="74" y="45" width="52" height="96" rx="8" stroke="#8a6421" stroke-width="4"/>
-          <circle cx="100" cy="129" r="4" fill="#8a6421"/>
-          <path d="M60 155 L140 155" stroke="#8a6421" stroke-width="4"/>
+          <circle cx="100" cy="100" r="88" stroke="#8a6421" stroke-width="4" stroke-dasharray="6 4"></circle>
+          <circle cx="100" cy="100" r="72" stroke="#8a6421" stroke-width="2"></circle>
+          <rect x="74" y="45" width="52" height="96" rx="8" stroke="#8a6421" stroke-width="4"></rect>
+          <circle cx="100" cy="129" r="4" fill="#8a6421"></circle>
+          <path d="M60 155 L140 155" stroke="#8a6421" stroke-width="4"></path>
         </svg>
       </div>
 
       <!-- 4 Góc Hoa Văn -->
       <svg class="corner corner-tl" viewBox="0 0 100 100" fill="none">
-        <path d="M4 4 H92 V12 H12 V92 H4 V4 Z" fill="#8b1e24"/>
-        <path d="M18 18 H65 V23 H23 V65 H18 V18 Z" fill="#c59b27"/>
-        <circle cx="32" cy="32" r="5" fill="#8b1e24"/>
+        <path d="M4 4 H92 V12 H12 V92 H4 V4 Z" fill="#8b1e24"></path>
+        <path d="M18 18 H65 V23 H23 V65 H18 V18 Z" fill="#c59b27"></path>
+        <circle cx="32" cy="32" r="5" fill="#8b1e24"></circle>
       </svg>
       <svg class="corner corner-tr" viewBox="0 0 100 100" fill="none">
-        <path d="M4 4 H92 V12 H12 V92 H4 V4 Z" fill="#8b1e24"/>
-        <path d="M18 18 H65 V23 H23 V65 H18 V18 Z" fill="#c59b27"/>
-        <circle cx="32" cy="32" r="5" fill="#8b1e24"/>
+        <path d="M4 4 H92 V12 H12 V92 H4 V4 Z" fill="#8b1e24"></path>
+        <path d="M18 18 H65 V23 H23 V65 H18 V18 Z" fill="#c59b27"></path>
+        <circle cx="32" cy="32" r="5" fill="#8b1e24"></circle>
       </svg>
       <svg class="corner corner-bl" viewBox="0 0 100 100" fill="none">
-        <path d="M4 4 H92 V12 H12 V92 H4 V4 Z" fill="#8b1e24"/>
-        <path d="M18 18 H65 V23 H23 V65 H18 V18 Z" fill="#c59b27"/>
-        <circle cx="32" cy="32" r="5" fill="#8b1e24"/>
+        <path d="M4 4 H92 V12 H12 V92 H4 V4 Z" fill="#8b1e24"></path>
+        <path d="M18 18 H65 V23 H23 V65 H18 V18 Z" fill="#c59b27"></path>
+        <circle cx="32" cy="32" r="5" fill="#8b1e24"></circle>
       </svg>
       <svg class="corner corner-br" viewBox="0 0 100 100" fill="none">
-        <path d="M4 4 H92 V12 H12 V92 H4 V4 Z" fill="#8b1e24"/>
-        <path d="M18 18 H65 V23 H23 V65 H18 V18 Z" fill="#c59b27"/>
-        <circle cx="32" cy="32" r="5" fill="#8b1e24"/>
+        <path d="M4 4 H92 V12 H12 V92 H4 V4 Z" fill="#8b1e24"></path>
+        <path d="M18 18 H65 V23 H23 V65 H18 V18 Z" fill="#c59b27"></path>
+        <circle cx="32" cy="32" r="5" fill="#8b1e24"></circle>
       </svg>
 
       <div class="cert-content">
         <!-- Quốc hiệu & Đơn vị -->
         <div class="top-header-row">
           <div class="org-block">
-            <div class="org-parent" id="outParentOrg"></div>
-            <div class="org-name" id="outSchool"></div>
+            <div class="org-parent" id="outParentOrg">HIỆP HỘI CHĂM SÓC DẾ YÊU VIỆT NAM</div>
+            <div class="org-name" id="outSchool">HỌC VIỆN ĐÀO TẠO LỄ TÂN ASMARTCARE</div>
           </div>
           <div class="motto-block">
             <div class="motto-main">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
@@ -847,18 +826,18 @@
         <!-- Huy hiệu -->
         <div class="crest-container">
           <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="45" fill="#8b1e24" stroke="#c59b27" stroke-width="4"/>
-            <circle cx="50" cy="50" r="38" fill="none" stroke="#f3dc8a" stroke-width="1.5" stroke-dasharray="3 3"/>
-            <rect x="36" y="22" width="28" height="52" rx="4" fill="#fffdf7" stroke="#c59b27" stroke-width="2.5"/>
-            <line x1="45" y1="27" x2="55" y2="27" stroke="#8b1e24" stroke-width="2" stroke-linecap="round"/>
-            <circle cx="50" cy="68" r="2.5" fill="#8b1e24"/>
-            <path d="M43 46 L48 51 L58 39" fill="none" stroke="#15803d" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="50" cy="50" r="45" fill="#8b1e24" stroke="#c59b27" stroke-width="4"></circle>
+            <circle cx="50" cy="50" r="38" fill="none" stroke="#f3dc8a" stroke-width="1.5" stroke-dasharray="3 3"></circle>
+            <rect x="36" y="22" width="28" height="52" rx="4" fill="#fffdf7" stroke="#c59b27" stroke-width="2.5"></rect>
+            <line x1="45" y1="27" x2="55" y2="27" stroke="#8b1e24" stroke-width="2" stroke-linecap="round"></line>
+            <circle cx="50" cy="68" r="2.5" fill="#8b1e24"></circle>
+            <path d="M43 46 L48 51 L58 39" fill="none" stroke="#15803d" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path>
           </svg>
         </div>
 
         <div class="cert-title-sub">VĂN BẰNG CHỨNG NHẬN DANH GIÁ</div>
         <h1 class="cert-title-main">BẰNG TỐT NGHIỆP</h1>
-        <div class="cert-major" id="outMajor"></div>
+        <div class="cert-major" id="outMajor">LỄ TÂN TIẾP NHẬN &amp; TƯ VẤN SỬA CHỮA ĐIỆN THOẠI</div>
 
         <!-- PHẦN THÂN BẰNG: BÊN TRÁI LÀ ẢNH THẺ HỌC VIÊN 3x4 + DẤU GIÁP LAI, BÊN PHẢI LÀ THÔNG TIN -->
         <div class="main-body-layout">
@@ -866,36 +845,36 @@
           <!-- Cột Ảnh Học Viên -->
           <div class="student-photo-col">
             <div class="photo-frame">
-              <img id="outPhotoImg" alt="Ảnh học viên" style="display: none;" />
-              <div class="photo-placeholder" id="outPhotoPlaceholder">
+              <img id="outPhotoImg" alt="Ảnh học viên" style="display: block;" src="https://i.ibb.co/bGLdnbV/gpt-image-1-5-high-fidelity-b-bi-n-nh-th-nh-nh-t.png">
+              <div class="photo-placeholder" id="outPhotoPlaceholder" style="display: none;">
                 <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="40" cy="28" r="14" fill="#64748b"/>
-                  <path d="M16 68 C16 50 64 50 64 68" fill="#64748b"/>
+                  <circle cx="40" cy="28" r="14" fill="#64748b"></circle>
+                  <path d="M16 68 C16 50 64 50 64 68" fill="#64748b"></path>
                 </svg>
-                <span>ẢNH THẺ 3x4<br/>HỌC VIÊN</span>
+                <span>ẢNH THẺ 3x4<br>HỌC VIÊN</span>
               </div>
             </div>
 
             <!-- Dấu đỏ giáp lai đóng lên góc ảnh -->
             <svg class="giap-lai-stamp" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="50" cy="50" r="44" fill="none" stroke="#d62828" stroke-width="3.5" stroke-dasharray="6 2"/>
-              <circle cx="50" cy="50" r="30" fill="none" stroke="#d62828" stroke-width="1.5"/>
+              <circle cx="50" cy="50" r="44" fill="none" stroke="#d62828" stroke-width="3.5" stroke-dasharray="6 2"></circle>
+              <circle cx="50" cy="50" r="30" fill="none" stroke="#d62828" stroke-width="1.5"></circle>
               <text x="50" y="46" text-anchor="middle" fill="#d62828" font-size="9" font-weight="900">GIÁP LAI</text>
               <text x="50" y="58" text-anchor="middle" fill="#d62828" font-size="8" font-weight="bold">CHÍNH CHỦ</text>
             </svg>
 
-            <div class="photo-caption" id="outPhotoCaption"></div>
+            <div class="photo-caption" id="outPhotoCaption">Khóa: K2026 - Lễ Tân Vàng</div>
           </div>
 
           <!-- Cột Thông Tin Học Viên & Bảng Điểm -->
           <div class="student-info-col">
             <p class="present-line">Hội đồng Thẩm định Tay nghề &amp; Thần thái Lễ tân trân trọng trao bằng cho:</p>
-            <div class="recipient-name" id="outName"></div>
-            <p class="achievement-desc" id="outDesc"></p>
+            <div class="recipient-name" id="outName">Hà Thị Kiều Oanh</div>
+            <p class="achievement-desc" id="outDesc">Đã hoàn thành xuất sắc khóa huấn luyện thực chiến: Nhìn khách bước vào đoán ngay tình trạng lỗi, báo giá thay linh kiện không chớp mắt và trấn an khách hàng khi kỹ thuật làm trễ hẹn.</p>
 
             <div class="skills-box">
               <div class="skills-box-title">BẢNG ĐIỂM CÁC HỌC PHẦN CHUYÊN MÔN ĐÃ ĐẠT CHUẨN</div>
-              <div class="skills-grid" id="outSkillsGrid"></div>
+              <div class="skills-grid" id="outSkillsGrid"><div class="skill-item"><span>1. Nhận biết lỗi, báo giá sửa chữa trong 0.5s</span><span class="skill-score">10.0 / 10 (A+)</span></div><div class="skill-item"><span>2. Nghệ thuật hỏi mật khẩu màn hình khéo léo</span><span class="skill-score">10.0 / 10 (A+)</span></div><div class="skill-item"><span>3. Tâm lý chiến khi khách bảo "Máy tự nhiên bị"</span><span class="skill-score">9.9 / 10 (A+)</span></div><div class="skill-item"><span>4. Kỹ năng viết phiếu tiếp nhận chữ đẹp rõ nét</span><span class="skill-score">10.0 / 10 (A+)</span></div></div>
             </div>
           </div>
 
@@ -903,30 +882,30 @@
 
         <!-- Thông tin Xếp loại -->
         <div class="meta-row">
-          <div class="meta-pill">Xếp loại: <strong id="outRank"></strong></div>
-          <div class="meta-pill">Hình thức đào tạo: <strong id="outMode"></strong></div>
-          <div class="meta-pill">Số hiệu bằng: <strong id="outCode"></strong></div>
+          <div class="meta-pill">Xếp loại: <strong id="outRank">Xuất Sắc Đỉnh Nóc Kịch Trần</strong></div>
+          <div class="meta-pill">Hình thức đào tạo: <strong id="outMode">Chính quy</strong></div>
+          <div class="meta-pill">Số hiệu bằng: <strong id="outCode">ASM-LT-9999VIP</strong></div>
         </div>
 
         <!-- Chân trang: QR + Huy chương vàng + Chữ ký & Dấu đỏ -->
         <div class="cert-footer">
           <div class="qr-verify">
             <svg class="qr-box" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-              <rect width="100" height="100" fill="#fff"/>
-              <rect x="8" y="8" width="26" height="26" fill="none" stroke="#142238" stroke-width="6"/>
-              <rect x="16" y="16" width="10" height="10" fill="#142238"/>
-              <rect x="66" y="8" width="26" height="26" fill="none" stroke="#142238" stroke-width="6"/>
-              <rect x="74" y="16" width="10" height="10" fill="#142238"/>
-              <rect x="8" y="66" width="26" height="26" fill="none" stroke="#142238" stroke-width="6"/>
-              <rect x="16" y="74" width="10" height="10" fill="#142238"/>
-              <rect x="44" y="12" width="8" height="8" fill="#142238"/>
-              <rect x="44" y="28" width="12" height="8" fill="#142238"/>
-              <rect x="40" y="44" width="20" height="20" fill="#8b1e24"/>
-              <rect x="14" y="44" width="16" height="8" fill="#142238"/>
-              <rect x="68" y="46" width="18" height="8" fill="#142238"/>
-              <rect x="44" y="72" width="12" height="18" fill="#142238"/>
-              <rect x="66" y="66" width="12" height="12" fill="#142238"/>
-              <rect x="80" y="78" width="12" height="14" fill="#142238"/>
+              <rect width="100" height="100" fill="#fff"></rect>
+              <rect x="8" y="8" width="26" height="26" fill="none" stroke="#142238" stroke-width="6"></rect>
+              <rect x="16" y="16" width="10" height="10" fill="#142238"></rect>
+              <rect x="66" y="8" width="26" height="26" fill="none" stroke="#142238" stroke-width="6"></rect>
+              <rect x="74" y="16" width="10" height="10" fill="#142238"></rect>
+              <rect x="8" y="66" width="26" height="26" fill="none" stroke="#142238" stroke-width="6"></rect>
+              <rect x="16" y="74" width="10" height="10" fill="#142238"></rect>
+              <rect x="44" y="12" width="8" height="8" fill="#142238"></rect>
+              <rect x="44" y="28" width="12" height="8" fill="#142238"></rect>
+              <rect x="40" y="44" width="20" height="20" fill="#8b1e24"></rect>
+              <rect x="14" y="44" width="16" height="8" fill="#142238"></rect>
+              <rect x="68" y="46" width="18" height="8" fill="#142238"></rect>
+              <rect x="44" y="72" width="12" height="18" fill="#142238"></rect>
+              <rect x="66" y="66" width="12" height="12" fill="#142238"></rect>
+              <rect x="80" y="78" width="12" height="14" fill="#142238"></rect>
             </svg>
             <span>Xác thực văn bằng điện tử</span>
             <span>Giá trị: Trọn đời (Không bảo hành)</span>
@@ -934,10 +913,10 @@
 
           <div class="gold-seal-col">
             <svg class="gold-medal-svg" onclick="launchConfetti()" title="Bấm để bắn pháo hoa chúc mừng!" viewBox="0 0 120 130" xmlns="http://www.w3.org/2000/svg">
-              <polygon points="38,75 22,126 42,116 54,128 56,78" fill="#8b1e24"/>
-              <polygon points="82,75 98,126 78,116 66,128 64,78" fill="#6b1419"/>
-              <circle cx="60" cy="52" r="42" fill="#c59b27" stroke="#8a6421" stroke-width="3"/>
-              <circle cx="60" cy="52" r="34" fill="#f3dc8a" stroke="#8a6421" stroke-width="1.5" stroke-dasharray="4 2"/>
+              <polygon points="38,75 22,126 42,116 54,128 56,78" fill="#8b1e24"></polygon>
+              <polygon points="82,75 98,126 78,116 66,128 64,78" fill="#6b1419"></polygon>
+              <circle cx="60" cy="52" r="42" fill="#c59b27" stroke="#8a6421" stroke-width="3"></circle>
+              <circle cx="60" cy="52" r="34" fill="#f3dc8a" stroke="#8a6421" stroke-width="1.5" stroke-dasharray="4 2"></circle>
               <text x="60" y="46" text-anchor="middle" font-size="9" font-weight="bold" fill="#8b1e24">CHỨNG NHẬN</text>
               <text x="60" y="59" text-anchor="middle" fill="#142238" font-size="11" font-weight="900">100% UY TÍN</text>
               <text x="60" y="71" text-anchor="middle" fill="#8a6421" font-size="8" font-weight="bold">★ ★ ★ ★ ★</text>
@@ -945,22 +924,22 @@
           </div>
 
           <div class="signature-col">
-            <div class="issue-date" id="outDate"></div>
-            <div class="signer-role" id="outSignerRole"></div>
+            <div class="issue-date" id="outDate">Ngày 01 tháng 10 năm 2026</div>
+            <div class="signer-role" id="outSignerRole">QUẢN LÝ KỸ THUẬT ASMARTCARE</div>
 
             <!-- Con dấu đỏ tròn (Bấm 5 lần liên tiếp vào dấu đỏ này để mở khóa Admin) -->
             <svg class="red-stamp" id="secretStamp" onclick="handleSecretStampClick()" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="70" cy="70" r="62" fill="none" stroke="#d62828" stroke-width="4"/>
-              <circle cx="70" cy="70" r="56" fill="none" stroke="#d62828" stroke-width="1.5"/>
-              <circle cx="70" cy="70" r="36" fill="none" stroke="#d62828" stroke-width="2"/>
+              <circle cx="70" cy="70" r="62" fill="none" stroke="#d62828" stroke-width="4"></circle>
+              <circle cx="70" cy="70" r="56" fill="none" stroke="#d62828" stroke-width="1.5"></circle>
+              <circle cx="70" cy="70" r="36" fill="none" stroke="#d62828" stroke-width="2"></circle>
               <text x="70" y="31" text-anchor="middle" fill="#d62828" font-size="9.5" font-weight="bold">HỘI ĐỒNG GIÁM ĐỊNH</text>
               <text x="70" y="66" text-anchor="middle" fill="#d62828" font-size="11" font-weight="900">ĐÃ KIỂM ĐỊNH</text>
               <text x="70" y="80" text-anchor="middle" fill="#d62828" font-size="8.5" font-weight="bold">CHỐT ĐƠN THẦN SẦU</text>
               <text x="70" y="116" text-anchor="middle" fill="#d62828" font-size="9" font-weight="bold">★ UY TÍN SỐ 1 ★</text>
             </svg>
 
-            <div class="signature-handwriting" id="outSignHand"></div>
-            <div class="signer-name" id="outSigner"></div>
+            <div class="signature-handwriting" id="outSignHand">Phạm Thị Mỹ Lệ</div>
+            <div class="signer-name" id="outSigner">Phạm Thị Mỹ Lệ</div>
           </div>
         </div>
 
@@ -978,7 +957,7 @@
     </button>
   </div>
 
-  <div class="toast" id="toastMsg"></div>
+  <div class="toast" id="toastMsg">🔓 Đã mở bảng Hiệu Trưởng ở đầu trang!</div>
 
   <script>
     // Đổ dữ liệu từ biến THONG_TIN_BANG (ở dòng 14) lên giao diện Bằng Tốt Nghiệp
@@ -1177,5 +1156,6 @@
     initAdminInputs();
     setTimeout(launchConfetti, 400);
   </script>
-</body>
-</html>
+
+
+</body></html>
